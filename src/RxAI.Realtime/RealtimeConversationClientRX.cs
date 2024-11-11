@@ -257,7 +257,17 @@ public partial class RealtimeConversationClientRX
         OpenAIClientOptions? options = null)
     {
         OpenAIClient client = options == null ? new(credential) : new(credential, options);
-        return FromOpenAIClient(client, model);
+        return FromOpenAIClient(client, model); // Does not work
+    }
+    /// <summary>
+    /// Creates a RealtimeConverstionClientRX instance from the default configuration 
+    /// stored in the system's environment variables.
+    /// </summary>
+    /// <returns></returns>
+    public static RealtimeConversationClientRX GetConfiguredClient()
+    {
+        var conversationClient = RealtimeClientProvider.GetConfiguredClient();
+        return new RealtimeConversationClientRX(conversationClient);
     }
 
     /// <summary>

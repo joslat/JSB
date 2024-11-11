@@ -12,7 +12,7 @@ Console.OutputEncoding = Encoding.UTF8;
 
 RealtimeConversationClientRX conversation;
 
-bool useOpenAI = true;
+bool useOpenAI = false;
 if (useOpenAI)
 {
     string? openAIKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
@@ -28,8 +28,7 @@ if (useOpenAI)
 else
 {
     conversation =
-        RealtimeConversationClientRX.FromAzureCredential(
-            new ApiKeyCredential(EnvironmentWellKnown.ApiKey));
+        RealtimeConversationClientRX.GetConfiguredClient();
 }
 
 if (conversation == null)
